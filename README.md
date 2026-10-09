@@ -2,11 +2,19 @@
 
 Shiksha Copilot is a responsive learning dashboard for the AVINYA 2K26 / SIIC, IIT Kanpur hackathon concept. This build extends the previous Gemini-based foundation with a persistent backend state store, explicit demo mode, objective local grading, syllabus document extraction, and a clear separation between live AI and deterministic fallback responses.
 
+## Latest UI and answer-formatting refresh
+
+- Replaced the previous navy and warm-editorial styling with a light Prism Garden palette: soft lilac, paper white, plum-violet, coral, and restrained botanical green accents.
+- Applied the light visual system across dashboard cards, navigation, tutor chat, syllabus tools, forms, adaptive assessment, and generated notes.
+- Normalizes escaped Markdown punctuation and HTML entities before rendering AI answers, so sequences such as `\###`, `\*\*bold\*\*`, and `&#x20;` are cleaned up.
+- Renders headings, lists, code blocks, quotes, and common LaTeX fractions as readable content instead of exposing raw formatting syntax.
+- Added stricter AI response instructions to avoid escaped Markdown and HTML-encoded spacing artifacts.
+
 ## What's implemented
 
 - Premium responsive dashboard, AI Tutor, Syllabus Intelligence, Adaptive Assessment, Learning Path, and Learner Profile views.
 - General Learning and Personalized Preparation tutor modes.
-- Syllabus parsing from pasted text and import from text-based PDF, DOCX, and TXT files. Imported content is not treated as officially verified; review the extracted text before parsing/saving. Scanned PDFs need OCR and are not supported by this importer.
+- Syllabus parsing from pasted text and import from text-based PDF, DOCX, and TXT files. Imported documents pass through a syllabus-focused text filter that removes common institutional headers/footers, page numbers, course-code/credit metadata, exam and marking rules, administrative notices, and references sections while preserving unit headings and topic lines. Review the filtered result before parsing/saving. Scanned PDFs need OCR and are not supported by this importer.
 - Topic-aware local demo question bank for arrays, linked lists, stacks, queues, trees, probability, photosynthesis, and operating systems; a generic study-skills fallback is also included.
 - Deterministic objective answer grading and transparent remediation messages in demo mode.
 - Optional Gemini live AI via a server-side API key. When Gemini is missing or unavailable, the app falls back to a clearly labeled deterministic demo response instead of pretending that live AI succeeded.
@@ -67,7 +75,7 @@ The model shown above is an example; confirm current availability for your accou
 - `GET /api/state`, `POST /api/state`, `POST /api/state/reset` — persistent local learner state.
 - `GET /api/syllabus`, `POST /api/syllabus`, `PATCH /api/syllabus` — saved syllabus.
 - `POST /api/syllabus/parse` — parse pasted syllabus text (Gemini enhancement is optional).
-- `POST /api/syllabus/import` — extract text from PDF/DOCX/TXT upload payload.
+- `POST /api/syllabus/import` — extract and filter curriculum-focused text from PDF/DOCX/TXT upload payload.
 - `POST /api/ai` — tutor, notes, quiz, evaluation, plan, readiness and analysis actions.
 - `GET /api/progress`, `GET /api/progress/topics`, `GET /api/preparation/summary` — progress records.
 - `GET /api/tutor/context` — bounded learner context for tutor use.
@@ -103,3 +111,8 @@ The tests validate deterministic demo question generation, objective grading, ge
 4. **2:00–3:00 — Run an adaptive assessment.** Click **Start Adaptive Session**, choose an answer and submit. The answer is graded against the stored correct option, a mistake is recorded when wrong, mastery is updated, and the next question is selected from another available syllabus topic where possible.
 5. **3:00–4:00 — Compare tutor modes.** Ask a general question in General Learning mode, then switch to Personalized Preparation and ask “Explain my weakest topic” or “Show my preparation progress.” The personalized answer uses saved learner evidence; unsupported demo requests are labeled honestly.
 6. **4:00–5:00 — Demonstrate persistence and AI modes.** Refresh the page and show the saved learner state. Open AI Configuration to show the mode. With a valid, quota-enabled key, live Gemini is used; without one, the local demo remains functional. Generate notes or a seven-day plan from the syllabus.
+
+
+## Independent Understanding Verification
+
+The Overview dashboard includes a separate, closed-book verification flow. It generates a fresh open-ended question for a selected syllabus topic, hides answer choices and the rubric until submission, evaluates the written response, and routes a weak response to targeted revision before another attempt. Independent checks are stored separately from the assisted-practice activity count and are persisted with the learner state. In local demo mode, evaluation is explicitly a rough keyword heuristic; use configured live AI for semantic evaluation.

@@ -81,6 +81,38 @@
           <div class="connector"></div>
           <div class="step"><b>05</b><span>Adapt</span><i>○</i></div>
         </div>
+
+        <section class="verification-section" aria-labelledby="verificationTitle">
+          <div class="verification-intro">
+            <div class="verification-kicker"><span class="verification-mark">✓</span> MASTERY, PROVEN</div>
+            <h2 id="verificationTitle">Independent Understanding Verification</h2>
+            <p>Understanding an explanation is the start. Prove you can apply the idea on your own—with a fresh question, no hints, and no chatbot assistance.</p>
+            <div class="verification-principles"><span>01 · Fresh question</span><span>02 · Closed-book response</span><span>03 · Evidence-based next step</span></div>
+          </div>
+          <div class="verification-metrics">
+            <article class="verification-metric"><span>INDEPENDENT CHECKS</span><strong id="independentCount">0</strong><small>Completed attempts</small></article>
+            <article class="verification-metric"><span>INDEPENDENT SUCCESS</span><strong id="independentRate">—</strong><small>Correct without assistance</small></article>
+            <article class="verification-metric"><span>LEARNER MODEL MASTERY</span><strong id="assistedCount">—</strong><small>Existing topic mastery estimate</small></article>
+          </div>
+          <div class="verification-workspace ai-card">
+            <div class="verification-workspace-head"><div><span class="verification-overline">THE SOLO CHECK</span><h3 id="verificationStageTitle">Ready to verify your understanding?</h3></div><span class="verification-status" id="verificationStatus">NOT STARTED</span></div>
+            <div class="verification-controls" id="verificationSetup">
+              <label for="verificationTopic">Choose a topic you have already studied</label>
+              <div class="verification-start-row"><select id="verificationTopic"><option value="">Load a syllabus to choose a topic</option></select><button class="primary-btn" id="startVerification">Start solo check <span>→</span></button></div>
+              <p class="verification-note">During the attempt, use your own understanding only. Shiksha will keep the expected answer and evaluation rubric hidden until you submit.</p>
+            </div>
+            <div id="verificationAttempt" class="verification-attempt hidden">
+              <div class="verification-question-meta"><span id="verificationTopicLabel">TOPIC</span><span id="verificationDifficulty">DIFFICULTY · MEDIUM</span><span>NO HINTS · NO OPTIONS</span></div>
+              <h4 id="verificationQuestion">Your independent question will appear here.</h4>
+              <label for="verificationAnswer">Your answer</label>
+              <textarea id="verificationAnswer" rows="5" placeholder="Explain your reasoning or show the steps you would use…" autocomplete="off" spellcheck="false"></textarea>
+              <div class="verification-submit-row"><span>Take your time. Submit only when you have worked it out yourself.</span><button class="primary-btn" id="submitVerification">Submit for evaluation <span>→</span></button></div>
+            </div>
+            <div id="verificationFeedback" class="verification-feedback hidden" aria-live="polite"></div>
+            <div id="verificationNextActions" class="verification-next-actions hidden"></div>
+          </div>
+          <p class="verification-footnote">Two separate signals, one honest learner model: AI-assisted practice helps you learn; independent verification provides stronger evidence that you can apply it alone.</p>
+        </section>
       </section>
 
       <section id="view-learn" class="view">
@@ -134,7 +166,7 @@ Unit 2: Plant Physiology
           <div class="card-head"><span>AI STUDY GENERATOR</span><span>SYLLABUS + LEARNER CONTEXT</span></div>
           <div class="action-row"><select id="topicSelect"><option>No syllabus topic</option></select><button class="secondary-btn" data-action="notes">Detailed Notes</button><button class="secondary-btn" data-action="syllabus-notes">Full Syllabus Notes</button><button class="secondary-btn" data-action="quick">Quick Revision</button><button class="secondary-btn" data-action="flashcards">Flashcards</button><button class="secondary-btn" data-action="quiz">Practice Set</button><button class="secondary-btn" data-action="plan">Study Plan</button><button class="secondary-btn" data-action="readiness">Exam Readiness</button><button class="secondary-btn" data-action="analyze">Analyze Learner</button><button class="primary-btn" data-action="next">Next Best Action</button></div>
         </div>
-        <div id="aiOutputPanel" class="ai-card ai-output hidden"><div class="card-head"><span id="aiOutputTitle">AI OUTPUT</span><span>GENERATED FROM CURRENT CONTEXT</span></div><pre id="aiOutput"></pre></div>
+        <div id="aiOutputPanel" class="ai-card ai-output hidden"><div class="card-head"><span id="aiOutputTitle">AI OUTPUT</span><span>GENERATED FROM CURRENT CONTEXT</span></div><article id="aiOutput" class="rich-answer" aria-live="polite"></article></div>
       </section>
 
       <section id="view-assess" class="view">

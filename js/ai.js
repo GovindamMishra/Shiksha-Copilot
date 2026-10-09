@@ -26,8 +26,9 @@ class ShikshaAI {
   async flashcards(topic, context) { return (await this.request("flashcards", {topic}, context)).result; }
   async quiz(topic, context, count=5, difficulty="adaptive") { return (await this.request("quiz", {topic,count,difficulty}, context)).result; }
   async adaptiveQuiz(context) { return (await this.request("adaptive-quiz", {}, context)).result; }
+  async independentQuestion(topic, difficulty, previousQuestions, context) { return (await this.request("independent-question", {topic, difficulty, previousQuestions}, context)).result; }
   async adaptiveNext(payload, context) { return (await this.request("adaptive-next", payload, context)).result; }
-  async evaluate(question,answer,expectedAnswer,context) { return (await this.request("evaluate", {question,answer,expectedAnswer}, context)).result; }
+  async evaluate(question,answer,expectedAnswer,context,extra={}) { return (await this.request("evaluate", {question,answer,expectedAnswer,...extra}, context)).result; }
   async studyPlan(days,context) { return (await this.request("study-plan", {days}, context)).result; }
   async readiness(context) { return (await this.request("readiness", {}, context)).result; }
   async analyze(context) { return (await this.request("analyze", {}, context)).result; }

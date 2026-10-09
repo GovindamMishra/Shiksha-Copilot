@@ -5,6 +5,7 @@ import { fileURLToPath } from "node:url";
 import { buildPrompt, responseSchemaFor, parseJson, compactContext } from "./ai/orchestrator.js";
 import { readState, writeState, resetState } from "./storage.js";
 import { demoAction } from "./ai/demo.js";
+import { extractSyllabusContent } from "./syllabus-extractor.js";
 
 function loadDotEnv(file) {
   if (!fs.existsSync(file)) return;
@@ -190,7 +191,12 @@ const SYSTEM_RULES = `
 7. For practice, generate varied questions across recall, understanding, application and analysis, with explanations.
 8. For assessment evaluation, diagnose the misconception or missing step, not just correct/incorrect.
 9. Prefer precise terminology and preserve syllabus wording.
-10. Return JSON only when the caller requests a structured JSON action.`;
+10. Return JSON only when the caller requests a structured JSON action.
+11. For normal conversational answers, use polished, natural prose with readable Markdown: concise opening, descriptive headings only when useful, and clean bullet or numbered lists for multiple items.
+12. Never expose drafting labels such as “Question”, “Answer”, “Response”, internal notes, raw separators (***, ---), or unnecessary Markdown decoration. Do not wrap ordinary answers in a template unless the task needs one.
+13. For a greeting or broad opening, respond warmly and briefly. Offer at most three relevant ways to start, without a long generic feature list or repeated closing question.
+14. Write Markdown normally: use ### headings, **bold**, standard numbered lists and plain hyphen bullets. Never add backslashes before Markdown punctuation, never HTML-encode spaces or punctuation (such as &amp;#x20;), and never return raw markup artifacts.
+15. For formulas, use readable LaTeX only when needed; do not escape percent signs or Markdown characters. Keep explanations polished and easy to scan.`;
 
 async function handleAI(body) {
   const action = body.action || "ask";
@@ -234,7 +240,10 @@ const server = http.createServer(async (req, res) => {
       } catch (err) { return sendJson(res,422,{ok:false,error:`Could not read ${ext.toUpperCase()} file. Ensure backend dependencies are installed and the file is valid.`}); }
       text = String(text).replace(/\u0000/g,'').trim();
       if (text.length < 10) return sendJson(res,422,{ok:false,error:"No usable text was extracted. Scanned PDFs need OCR before import."});
-      return sendJson(res,200,{ok:true,filename,text,characters:text.length,notice:"Extracted text is not officially verified. Review and correct it before saving the syllabus."});
+      const extracted = extractSyllabusContent(text);
+      if (extracted.text.length < 10) return sendJson(res,422,{ok:false,error:"Text was extracted, but no clear syllabus topics were detected. This may be a scanned PDF or an unusual layout. Try a text-based PDF or paste the syllabus section manually."});
+      text = extracted.text;
+      return sendJson(res,200,{ok:true,filename,text,characters:text.length,removedLines:extracted.removedLines,detectedUnits:extracted.detectedUnits,notice:"Filtered for syllabus topics. Review the extracted curriculum before parsing; some unusual PDF layouts may still need manual correction."});
     }
     if (req.url === "/api/syllabus/parse" && req.method === "POST") {
       const body = await readBody(req);
