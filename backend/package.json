@@ -1,0 +1,16 @@
+{
+  "name": "shiksha-copilot-backend",
+  "version": "3.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "test": "node --test"
+  },
+  "description": "Syllabus-aware adaptive learning platform with persistent local demo mode and optional Gemini AI",
+  "dependencies": {
+    "mammoth": "^1.9.0",
+    "pdf-parse": "^1.1.1"
+  }
+}

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Shiksha Copilot — adaptive AI learning system">
+  <title>Shiksha Copilot — Adaptive Learning Intelligence</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="noise"></div>
+  <div class="grid-bg"></div>
+  <div class="orb orb-a"></div><div class="orb orb-b"></div>
+
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-mark"><span></span><span></span><span></span></div>
+      <div><strong>SHIKSHA<span>∞</span></strong><small>ADAPTIVE LEARNING INTELLIGENCE</small></div>
+    </div>
+    <div class="system-state"><i></i><span id="aiStatus">AI CORE READY</span><b id="modeBadge">GEMINI • BACKEND</b></div>
+  </header>
+
+  <main class="app-shell">
+    <aside class="sidebar">
+      <button class="nav active" data-view="overview"><span>◈</span> Overview</button>
+      <button class="nav" data-view="learn"><span>◇</span> AI Tutor</button>
+      <button class="nav" data-view="syllabus"><span>▦</span> Syllabus AI</button>
+      <button class="nav" data-view="assess"><span>◎</span> Assessment</button>
+      <button class="nav" data-view="path"><span>⌁</span> Learning Path</button>
+      <button class="nav" data-view="profile"><span>◌</span> Learner Profile</button>
+      <div class="sidebar-bottom">
+        <div class="core-mini"><div class="pulse"></div><span>ADAPTIVE CORE</span><b>ONLINE</b></div>
+        <button class="settings-btn" id="settingsBtn">⚙ AI Configuration</button>
+      </div>
+    </aside>
+
+    <section class="content">
+      <section id="view-overview" class="view active-view">
+        <div class="hero-row">
+          <div>
+            <p class="eyebrow">PERSONAL LEARNING OS</p>
+            <h1>Learn <em>your way.</em></h1>
+            <p class="hero-copy">Shiksha Copilot continuously understands your progress, identifies learning gaps and adapts what comes next.</p>
+          </div>
+          <button class="primary-btn" id="startSession">Start Adaptive Session <span>→</span></button>
+        </div>
+
+        <div class="dashboard-grid">
+          <article class="ai-card mastery-card">
+            <div class="card-head"><span>OVERALL MASTERY</span><span class="live-tag">LIVE LEARNER MODEL</span></div>
+            <div class="mastery-ring" id="masteryRing"><div><strong id="masteryValue">78</strong><small>%</small><span>MASTERED</span></div></div>
+            <div class="trend">No learning activity recorded yet.</div>
+          </article>
+
+          <article class="ai-card insight-card">
+            <div class="card-head"><span>AI INSIGHT</span><div class="live-dot"></div></div>
+            <div class="insight-icon">✦</div>
+            <h3 id="insightTitle">Learning gap detected</h3>
+            <p id="insightText">Load your syllabus to build a real learner model and receive adaptive recommendations.</p>
+            <button class="text-btn" id="explainInsight">Explain why →</button>
+          </article>
+
+          <article class="ai-card skill-card">
+            <div class="card-head"><span>SKILL MATRIX</span><button id="refreshSkills">↻</button></div>
+            <div id="skillList" class="skill-list"></div>
+          </article>
+        </div>
+
+        <div class="section-heading"><div><p class="eyebrow">ADAPTIVE INTELLIGENCE</p><h2>Your learning trajectory</h2><p class="section-copy">Every answer updates mastery, weak-topic priority and the next learning action.</p></div><span id="trajectoryLabel">AI OPTIMIZED</span></div>
+        <div class="trajectory">
+          <div class="step done"><b>01</b><span>Assess</span><i>✓</i></div>
+          <div class="connector done"></div>
+          <div class="step done"><b>02</b><span>Diagnose</span><i>✓</i></div>
+          <div class="connector active"></div>
+          <div class="step current"><b>03</b><span>Practice</span><i>●</i></div>
+          <div class="connector"></div>
+          <div class="step"><b>04</b><span>Evaluate</span><i>○</i></div>
+          <div class="connector"></div>
+          <div class="step"><b>05</b><span>Adapt</span><i>○</i></div>
+        </div>
+      </section>
+
+      <section id="view-learn" class="view">
+        <div class="page-title"><p class="eyebrow">AI TUTOR</p><h2>Ask. Understand. Master.</h2><p>Ask syllabus-grounded questions, general knowledge questions, or request personalized teaching based on your learning evidence.</p></div>
+        <div class="tutor-layout">
+          <div class="ai-card chat-card">
+            <div id="chatMessages" class="chat-messages">
+              <div class="message ai"><div class="avatar">✦</div><div><small>SHIKSHA AI</small><p>Hi! I’m your adaptive learning copilot. Ask me to explain a concept, create practice questions, or help you plan your study session.</p></div></div>
+            </div>
+            <div class="suggestions">
+              <label class="mode-select">RESPONSE MODE <select id="chatMode" aria-label="AI tutor response mode"><option value="general">General Learning</option><option value="personalized">Personalized Preparation</option></select></label>
+              <button>Explain probability simply</button><button>Explain my weakest topic</button><button>Make a 7-day study plan</button>
+            </div>
+            <form id="chatForm" class="chat-input"><input id="chatInput" autocomplete="off" placeholder="Ask Shiksha anything about your learning..."><button>↑</button></form>
+          </div>
+          <div class="ai-card tutor-side">
+            <div class="card-head"><span>SESSION CONTEXT</span><span class="context-dot">●</span></div>
+            <div class="context-item"><span>Current subject</span><b id="currentSubject">Mathematics</b></div>
+            <div class="context-item"><span>Focus area</span><b id="focusArea">Not set</b></div>
+            <div class="context-item"><span>Syllabus</span><b id="syllabusStatus">Not loaded</b></div>
+            <div class="context-item"><span>Difficulty</span><b id="difficulty">Adaptive</b></div>
+            <div class="context-item"><span>Learning style</span><b>Visual + Practice</b></div>
+            <div class="mini-ai"><span>AI MEMORY</span><p>“I’ll use your recent performance to tailor the next response.”</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="view-syllabus" class="view">
+        <div class="page-title"><p class="eyebrow">SYLLABUS INTELLIGENCE</p><h2>Teach Shiksha what you actually need to learn.</h2><p>Paste a real syllabus. Shiksha indexes it into units and topics, then uses that context for tutoring, notes, quizzes and adaptive recommendations.</p></div>
+        <div class="syllabus-grid">
+          <div class="ai-card syllabus-editor">
+            <div class="card-head"><span>RAW SYLLABUS</span><span class="context-dot">●</span></div>
+            <label class="upload-label" for="syllabusFile">Import syllabus file (PDF, DOCX, or TXT)</label><input id="syllabusFile" type="file" accept=".pdf,.docx,.txt,text/plain,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+            <textarea id="syllabusInput" placeholder="Example:
+Subject: Biology
+Unit 1: Cell Biology
+- Cell structure
+- Membrane transport
+Unit 2: Plant Physiology
+- Photosynthesis
+- Respiration"></textarea>
+            <div class="syllabus-buttons"><button class="primary-btn" id="loadSyllabus">Parse & Load Syllabus <span>→</span></button><button class="secondary-btn" id="loadSampleDemo" type="button">Load Sample Data</button></div>
+            <div id="syllabusFeedback" class="feedback"></div>
+          </div>
+          <div class="ai-card syllabus-index">
+            <div class="card-head"><span>INDEXED CURRICULUM</span><span id="syllabusStatusPanel">Not loaded</span></div>
+            <div id="syllabusTree" class="syllabus-tree"></div>
+          </div>
+        </div>
+        <div class="ai-card learning-actions">
+          <div class="card-head"><span>AI STUDY GENERATOR</span><span>SYLLABUS + LEARNER CONTEXT</span></div>
+          <div class="action-row"><select id="topicSelect"><option>No syllabus topic</option></select><button class="secondary-btn" data-action="notes">Detailed Notes</button><button class="secondary-btn" data-action="syllabus-notes">Full Syllabus Notes</button><button class="secondary-btn" data-action="quick">Quick Revision</button><button class="secondary-btn" data-action="flashcards">Flashcards</button><button class="secondary-btn" data-action="quiz">Practice Set</button><button class="secondary-btn" data-action="plan">Study Plan</button><button class="secondary-btn" data-action="readiness">Exam Readiness</button><button class="secondary-btn" data-action="analyze">Analyze Learner</button><button class="primary-btn" data-action="next">Next Best Action</button></div>
+        </div>
+        <div id="aiOutputPanel" class="ai-card ai-output hidden"><div class="card-head"><span id="aiOutputTitle">AI OUTPUT</span><span>GENERATED FROM CURRENT CONTEXT</span></div><pre id="aiOutput"></pre></div>
+      </section>
+
+      <section id="view-assess" class="view">
+        <div class="page-title"><p class="eyebrow">DIAGNOSTIC ENGINE</p><h2>Find the gaps, not just the score.</h2><p>Assessment is intentionally modular so tomorrow’s requirements can replace or expand this engine.</p></div>
+        <div class="assessment ai-card">
+          <div class="assessment-top"><span id="qCount">QUESTION 01 / 05</span><span id="qTopic">SYLLABUS TOPIC</span></div>
+          <div id="adaptiveMeta" class="adaptive-meta"></div>
+          <div class="progress"><i id="qProgress"></i></div>
+          <h3 id="questionText">If a fair coin is tossed twice, what is the probability of getting two heads?</h3>
+          <div id="options" class="options"></div>
+          <div class="assessment-actions"><button class="secondary-btn" id="skipQ">Skip</button><button class="secondary-btn" id="generateQuiz">Generate Adaptive Quiz</button><button class="primary-btn" id="nextQ">Submit Answer <span>→</span></button></div>
+          <div id="assessmentFeedback" class="feedback"></div>
+        </div>
+      </section>
+
+      <section id="view-path" class="view">
+        <div class="page-title"><p class="eyebrow">ADAPTIVE ROADMAP</p><h2>Your AI-generated learning path.</h2><p>Every module is replaceable with tomorrow’s official requirements, syllabus, datasets or evaluation rules.</p></div>
+        <div id="pathGrid" class="path-grid"></div>
+      </section>
+
+      <section id="view-profile" class="view">
+        <div class="page-title"><p class="eyebrow">LEARNER MODEL</p><h2>Who is Shiksha teaching?</h2><p>A lightweight local profile for the foundation build. More fields can be added later.</p></div>
+        <div class="profile-grid">
+          <form id="profileForm" class="ai-card profile-card">
+            <label>Name<input id="profileName" value="Learner"></label>
+            <label>Level<select id="profileLevel"><option>School</option><option selected>Undergraduate</option><option>Competitive Exam</option><option>Professional</option></select></label>
+            <label>Primary subject<input id="profileSubject" value="Mathematics"></label>
+            <label>Target<input id="profileTarget" value="Build strong fundamentals"></label>
+            <label>Exam date (optional)<input id="profileExamDate" type="date"></label>
+            <label>Daily study time (hours)<input id="profileDailyHours" type="number" min="0.25" max="16" step="0.25" value="2"></label>
+            <label>Preferred language<select id="profileLanguage"><option>English</option><option>Hindi</option><option>Hinglish</option></select></label>
+            <label>Learning format<select id="profileFormat"><option>Step-by-step explanations</option><option>Text notes</option><option>Worked examples</option><option>Quizzes and practice</option></select></label>
+            <button class="primary-btn" type="submit">Save Learner Model <span>→</span></button>
+          </form>
+          <div class="ai-card profile-preview"><div class="profile-avatar">L</div><p class="eyebrow">CURRENT LEARNER</p><h2 id="profilePreviewName">Learner</h2><span id="profilePreviewLevel">UNDERGRADUATE</span><div class="profile-stat"><b id="profileMastery">—</b><small>estimated mastery</small></div><div class="profile-stat"><b id="profileActivities">0</b><small>activities recorded</small></div></div>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <div id="settingsModal" class="modal hidden">
+    <div class="modal-box ai-card">
+      <button class="close" id="closeSettings">×</button>
+      <p class="eyebrow">AI CORE CONFIGURATION</p><h2>Gemini AI Gateway</h2>
+      <p class="modal-copy">Shiksha Copilot sends AI requests to the local Node.js backend. Your Gemini API key stays in <code>backend/.env</code> and is never exposed to this browser interface. Learner profile, syllabus, mistakes, mastery estimates and activity are stored locally in the backend JSON file; this local demo has no sign-in or multi-user isolation.</p>
+      <div class="context-item"><span>Provider</span><b>Google Gemini API</b></div>
+      <div class="context-item"><span>Backend</span><b>Node.js · localhost:8787</b></div>
+      <div class="context-item"><span>Model</span><b id="settingsModel">Configured in backend/.env</b></div>
+      <button class="primary-btn" id="checkAI">Check AI Connection <span>↻</span></button>
+      <button class="secondary-btn" id="resetDemo" type="button">Reset local demo data</button>
+      <small class="warning">If the connection check fails, verify GEMINI_API_KEY in backend/.env and restart the Node server.</small>
+      <div id="settingsFeedback" class="feedback"></div>
+    </div>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/ai.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
